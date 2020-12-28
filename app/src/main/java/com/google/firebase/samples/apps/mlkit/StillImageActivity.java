@@ -20,7 +20,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
+/*import android.support.v7.app.AppCompatActivity;*/
 import android.util.Log;
 import android.util.Pair;
 import android.view.MenuInflater;
@@ -36,20 +36,19 @@ import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.common.annotation.KeepName;
-import com.google.firebase.samples.apps.mlkit.cloudimagelabeling.CloudImageLabelingProcessor;
-import com.google.firebase.samples.apps.mlkit.cloudlandmarkrecognition.CloudLandmarkRecognitionProcessor;
-import com.google.firebase.samples.apps.mlkit.cloudtextrecognition.CloudDocumentTextRecognitionProcessor;
 
 
-import com.google.firebase.samples.apps.mlkit.cloudtextrecognition.CloudTextRecognitionProcessor;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /** Activity demonstrating different image detector features with a still image from camera. */
-@KeepName
+/*@KeepName
 public final class StillImageActivity extends AppCompatActivity {
 
   private static final String TAG = "StillImageActivity";
@@ -360,21 +359,11 @@ public final class StillImageActivity extends AppCompatActivity {
   }
 
   private void createImageProcessor() {
-    switch (selectedMode) {
-      case CLOUD_LABEL_DETECTION:
-        imageProcessor = new CloudImageLabelingProcessor();
-        break;
-      case CLOUD_LANDMARK_DETECTION:
-        imageProcessor = new CloudLandmarkRecognitionProcessor();
-        break;
-      case CLOUD_TEXT_DETECTION:
-        imageProcessor = new CloudTextRecognitionProcessor();
-        break;
-      case CLOUD_DOCUMENT_TEXT_DETECTION:
-        imageProcessor = new CloudDocumentTextRecognitionProcessor();
-        break;
-      default:
-        throw new IllegalStateException("Unknown selectedMode: " + selectedMode);
+    if (CLOUD_LANDMARK_DETECTION.equals(selectedMode)) {
+      imageProcessor = new CloudLandmarkRecognitionProcessor();
+    } else {
+      throw new IllegalStateException("Unknown selectedMode: " + selectedMode);
     }
   }
 }
+*/

@@ -17,10 +17,29 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.Spinner;
+import android.widget.ToggleButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.common.annotation.KeepName;
+import com.google.firebase.samples.apps.mlkit.facedetection.FaceDetectionProcessor;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+/*import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;*/
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,11 +51,7 @@ import android.widget.ToggleButton;
 
 import com.google.android.gms.common.annotation.KeepName;
 import com.google.firebase.ml.common.FirebaseMLException;
-import com.google.firebase.samples.apps.mlkit.barcodescanning.BarcodeScanningProcessor;
-import com.google.firebase.samples.apps.mlkit.custommodel.CustomImageClassifierProcessor;
 import com.google.firebase.samples.apps.mlkit.facedetection.FaceDetectionProcessor;
-import com.google.firebase.samples.apps.mlkit.imagelabeling.ImageLabelingProcessor;
-import com.google.firebase.samples.apps.mlkit.textrecognition.TextRecognitionProcessor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,9 +59,9 @@ import java.util.List;
 
 /** Demo app showing the various features of ML Kit for Firebase. This class is used to
  * set up continuous frame processing on frames from a camera source. */
-@KeepName
-public final class LivePreviewActivity extends AppCompatActivity
-    implements OnRequestPermissionsResultCallback,
+/*@KeepName*/
+/*public final class LivePreviewActivity extends AppCompatActivity*/
+ /*   implements OnRequestPermissionsResultCallback,
         OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
   private static final String FACE_DETECTION = "Face Detection";
@@ -143,33 +158,11 @@ public final class LivePreviewActivity extends AppCompatActivity
       cameraSource = new CameraSource(this, graphicOverlay);
     }
 
-    try {
-      switch (model) {
-        case CLASSIFICATION:
-          Log.i(TAG, "Using Custom Image Classifier Processor");
-          cameraSource.setMachineLearningFrameProcessor(new CustomImageClassifierProcessor(this));
-          break;
-        case TEXT_DETECTION:
-          Log.i(TAG, "Using Text Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new TextRecognitionProcessor());
-          break;
-        case FACE_DETECTION:
-          Log.i(TAG, "Using Face Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new FaceDetectionProcessor());
-          break;
-        case BARCODE_DETECTION:
-          Log.i(TAG, "Using Barcode Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor());
-          break;
-        case IMAGE_LABEL_DETECTION:
-          Log.i(TAG, "Using Image Label Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new ImageLabelingProcessor());
-          break;
-        default:
-          Log.e(TAG, "Unknown model: " + model);
-      }
-    } catch (FirebaseMLException e) {
-      Log.e(TAG, "can not create camera source: " + model);
+    if (FACE_DETECTION.equals(model)) {
+      Log.i(TAG, "Using Face Detector Processor");
+      cameraSource.setMachineLearningFrameProcessor(new FaceDetectionProcessor());
+    } else {
+      Log.e(TAG, "Unknown model: " + model);
     }
   }
 
@@ -178,6 +171,7 @@ public final class LivePreviewActivity extends AppCompatActivity
    * (e.g., because onResume was called before the camera source was created), this will be called
    * again when the camera source is created.
    */
+  /*
   private void startCameraSource() {
     if (cameraSource != null) {
       try {
@@ -204,6 +198,7 @@ public final class LivePreviewActivity extends AppCompatActivity
   }
 
   /** Stops the camera. */
+  /*
   @Override
   protected void onPause() {
     super.onPause();
@@ -217,6 +212,9 @@ public final class LivePreviewActivity extends AppCompatActivity
       cameraSource.release();
     }
   }
+
+   */
+/*
 
   private String[] getRequiredPermissions() {
     try {
@@ -276,4 +274,5 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.i(TAG, "Permission NOT granted: " + permission);
     return false;
   }
-}
+
+ */

@@ -13,7 +13,6 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.facedetection;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
@@ -29,21 +28,27 @@ import com.google.firebase.samples.apps.mlkit.VisionProcessorBase;
 import java.io.IOException;
 import java.util.List;
 
+/*import android.support.annotation.NonNull;*/
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 /** Face Detector Demo. */
 public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVisionFace>> {
 
   private static final String TAG = "FaceDetectionProcessor";
 
-  private final FirebaseVisionFaceDetector detector;
+  private FirebaseVisionFaceDetector detector;
 
   public FaceDetectionProcessor() {
-    FirebaseVisionFaceDetectorOptions options =
+    FirebaseVisionFaceDetectorOptions realTimeOpts =
         new FirebaseVisionFaceDetectorOptions.Builder()
-            .setClassificationType(FirebaseVisionFaceDetectorOptions.ALL_CLASSIFICATIONS)
-            .setTrackingEnabled(true)
+            .setClassificationMode(FirebaseVisionFaceDetectorOptions.ALL_CLASSIFICATIONS)
+                .setContourMode(FirebaseVisionFaceDetectorOptions.ALL_CONTOURS)
             .build();
 
-    detector = FirebaseVision.getInstance().getVisionFaceDetector(options);
+    FirebaseVisionFaceDetector detector = FirebaseVision.getInstance()
+            .getVisionFaceDetector(realTimeOpts);
   }
 
   @Override

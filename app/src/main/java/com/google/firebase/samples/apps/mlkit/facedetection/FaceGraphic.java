@@ -83,7 +83,6 @@ public class FaceGraphic extends Graphic {
     if (face == null) {
       return;
     }
-
     // Draws a circle at the position of the detected face, with the face's track id below.
     float x = translateX(face.getBoundingBox().centerX());
     float y = translateY(face.getBoundingBox().centerY());
